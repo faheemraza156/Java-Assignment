@@ -25,5 +25,6 @@ public class GetCastName {
 //            String actualXpathCastName = beforeXpathCastName +i+ afterXpathCastName;
 //            System.out.println(driver.findElement(By.xpath(actualXpathCastName)).getText());
 //        }
+//        System.out.println(driver.findElement(By.xpath(actualXpathCastName)).getText());
     }
 }
