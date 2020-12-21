@@ -1,9 +1,14 @@
 package steps;
 
 import components.Imdb;
-import org.openqa.selenium.Keys;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.interactions.Actions;
+import utils.GetByObject;
+
+import java.io.FileInputStream;
+import java.io.IOException;
 
 public class ImdbLink {
 
@@ -14,9 +19,20 @@ public class ImdbLink {
         this.driver = driver;
     }
 
-    public void click() {
-        Actions action = new Actions(driver);
+    public void click() throws IOException {
+//        Actions action = new Actions(driver);
 //        action.contextClick(driver.findElement(imdb.imdbLink)).sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ENTER).perform();
-        driver.findElement(imdb.imdbLink).click();
+
+        FileInputStream fileInputStream = new FileInputStream("qaautomation.xlsx");
+        XSSFWorkbook workbook = new XSSFWorkbook(fileInputStream);
+        XSSFSheet worksheet = workbook.getSheet("Input");
+        XSSFRow row = worksheet.getRow(2);
+
+        String cellValue = row.getCell(1).getStringCellValue();
+        driver.findElement(GetByObject.containingText(cellValue)).click();
+
+
+
+
     }
 }

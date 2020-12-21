@@ -2,6 +2,8 @@ package steps;
 
 import org.openqa.selenium.WebDriver;
 
+import java.io.IOException;
+
 public class ImdbCast {
     private WebDriver driver;
 
@@ -9,7 +11,7 @@ public class ImdbCast {
         this.driver = driver;
     }
 
-    public void save() {
+    public void save() throws IOException {
 
         ImdbLink imdbLink = new ImdbLink(driver);
         imdbLink.click();
