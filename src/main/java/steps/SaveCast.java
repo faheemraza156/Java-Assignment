@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static components.Imdb.*;
+import static components.FullCastList.*;
 
 public class SaveCast {
 
@@ -24,37 +24,31 @@ public class SaveCast {
     }
 
     public void inExcelFile() throws IOException {
-
-
-
         FileInputStream fileInputStream = new FileInputStream("qaautomation.xlsx");
         XSSFWorkbook workbook = new XSSFWorkbook(fileInputStream);
         XSSFSheet worksheet = workbook.getSheet("Series Cast");
-
 
         List<String> castNameList = new ArrayList<String>();
         List<String> castScreenNameList = new ArrayList<String>();
         List<String> castAppearanceList = new ArrayList<String>();
 
-        for(int i = 2; i<96; i=i+2) {
+        for(int i = 2; i<100; i=i+2) {
             String castName = "";
             String castScreenName = "";
             String castAppearance = "";
 
-            String actualXpathCastName = String.format(XpathCastName, i);
+            String actualXpathCastName = String.format(XPATH_CAST_NAME, i);
             castName = driver.findElement(By.xpath(actualXpathCastName)).getText();
 
-            String actualXpathScreenName = String.format(XpathScreenName, i);
+            String actualXpathScreenName = String.format(XPATH_SCREEN_NAME, i);
             castScreenName = driver.findElement(By.xpath(actualXpathScreenName)).getText();
 
-            String actualXpathCastAppearance = String.format(XpathCastAppearance, i);
+            String actualXpathCastAppearance = String.format(XPATH_CAST_APPEARANCE, i);
             castAppearance = driver.findElement(By.xpath(actualXpathCastAppearance)).getText();
-
 
             castNameList.add(castName);
             castScreenNameList.add(castScreenName);
             castAppearanceList.add(castAppearance);
-
         }
 
         for(int i=0; i<castNameList.size();i++){
@@ -72,7 +66,6 @@ public class SaveCast {
 
         FileOutputStream fileOutputStream = new FileOutputStream("qaautomation.xlsx");
         workbook.write(fileOutputStream);
-
     }
 }
 

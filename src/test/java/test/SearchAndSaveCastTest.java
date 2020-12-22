@@ -1,34 +1,28 @@
 package test;
 
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import data.DataProviderClass;
+
 import org.testng.annotations.Test;
 import steps.GoogleSearch;
 import steps.ImdbCast;
+import steps.ImdbLink;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.PrintStream;
-
-import static org.testng.Assert.*;
+import java.io.*;
 
 public class SearchAndSaveCastTest extends BaseTest {
 
-    @Test
-    public void searchAndSaveCastTest() throws IOException {
+    @Test(dataProvider = "searchAndSaveCastDataProvider", dataProviderClass = DataProviderClass.class)
+    public void searchAndSaveCastTest(String googleUrl, String googleSearchText, String linkText) throws IOException {
 
         GoogleSearch googleSearch = new GoogleSearch(driver);
-        googleSearch.searchAfterLife();
+        googleSearch.open(googleUrl);
+        googleSearch.usingText(googleSearchText);
+
+        ImdbLink imdbLink = new ImdbLink(driver);
+        imdbLink.clickUsing(linkText);
 
         ImdbCast imdbCast = new ImdbCast(driver);
         imdbCast.save();
-
     }
 }
 

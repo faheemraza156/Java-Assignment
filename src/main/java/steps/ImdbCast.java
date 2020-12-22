@@ -12,15 +12,10 @@ public class ImdbCast {
     }
 
     public void save() throws IOException {
-
-        ImdbLink imdbLink = new ImdbLink(driver);
-        imdbLink.click();
-
         Open open = new Open(driver);
         open.fullCast();
 
         SaveCast saveCast = new SaveCast(driver);
         saveCast.inExcelFile();
-
     }
 }

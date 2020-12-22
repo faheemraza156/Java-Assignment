@@ -1,7 +1,9 @@
 package steps;
 
-import components.Google;
 import org.openqa.selenium.WebDriver;
+
+import static components.GoogleSearchFeild.GOOGLE_SEARCH;
+import static components.GoogleSearchFeild.SEARCH_FEILD;
 
 public class SearchAfterLife {
     private WebDriver driver;
@@ -11,10 +13,9 @@ public class SearchAfterLife {
     }
 
 
-    public void searchInput(String input){
-        Google googlesearch = new Google();
-        driver.findElement(googlesearch.searchFeild).click();
-        driver.findElement(googlesearch.searchFeild).sendKeys(input);
-        driver.findElement(googlesearch.googleSearch).click();
+    public void using(String input){
+        driver.findElement(SEARCH_FEILD).click();
+        driver.findElement(SEARCH_FEILD).sendKeys(input);
+        driver.findElement(GOOGLE_SEARCH).click();
     }
 }
